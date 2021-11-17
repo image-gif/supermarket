@@ -4,7 +4,7 @@
       <slot name="left"></slot>
     </div>
     <div class="center">
-      <slot name="center">购物街</slot>
+      <slot name="center"></slot>
     </div>
     <div class="right">
       <slot name="right"></slot>
@@ -21,6 +21,7 @@ export default {
 <style lang = "less" scoped>
 .nav_bar {
   /* position: fixed; */
+  width: 100%;
   display: flex;
   height: 44px;
   line-height: 44px;

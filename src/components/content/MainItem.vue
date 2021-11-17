@@ -10,7 +10,7 @@
                 activeColor="red">
       <img src="@/assets/img/logo.png"
            alt="">
-      <div>关于</div>
+      <div>目录</div>
     </TabbarItem>
     <TabbarItem path="/cart"
                 activeColor="green">

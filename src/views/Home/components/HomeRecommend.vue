@@ -29,7 +29,6 @@ export default {
 <style lang = "less" scoped>
 .recommend {
   display: flex;
-
   box-shadow: 0 10px 1px rgba(66, 66, 66, 0.1);
   .item {
     flex: 1;

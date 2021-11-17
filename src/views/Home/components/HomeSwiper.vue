@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 暂时不要添加什么在Swiper中 -->
     <Swiper>
       <!-- 这里使用v-for 时，要绑定key值 -->
       <SwiperItem v-for="item in banner"
