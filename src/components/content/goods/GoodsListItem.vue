@@ -1,5 +1,6 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item"
+       @click="onClick">
     <img :src="goodsItem.show.img"
          alt="">
     <div class="goods-info">
@@ -19,6 +20,14 @@ export default {
       default: function () {
         return {}
       },
+    },
+  },
+  methods: {
+    onClick() {
+      // console.log('被点击')
+      //
+      // console.log(this.goodsItem.iid)
+      this.$router.push('/detail/' + this.goodsItem.iid)
     },
   },
 }

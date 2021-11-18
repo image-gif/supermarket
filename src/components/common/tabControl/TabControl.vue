@@ -1,11 +1,13 @@
 <template>
-  <div class="tabcontrol">
-    <div v-for="(item,index) in list"
-         :key="index"
-         class="item"
-         :class="{active: index === isCurrentIndex}"
-         @click="onClick(index)">
-      <span>{{item}}</span>
+  <div>
+    <div class="tabcontrol">
+      <div v-for="(item,index) in list"
+           :key="index"
+           class="item"
+           :class="{active: index === CurrentIndex}"
+           @click="onClick(index)">
+        <span>{{item}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -21,12 +23,12 @@ export default {
   },
   data() {
     return {
-      isCurrentIndex: 0,
+      CurrentIndex: 0,
     }
   },
   methods: {
     onClick(index) {
-      this.isCurrentIndex = index
+      this.CurrentIndex = index
       // 向父组件发送数据
       this.$emit('changeIndex', index)
     },

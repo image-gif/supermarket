@@ -4,17 +4,27 @@
     <NavBar class="home-nav">
       <div slot='center'>购物街</div>
     </NavBar>
+    <TabControl :list="['流行','精选','新品']"
+                class="homeTabControl2"
+                ref="tabControl2"
+                @changeIndex="getIndex"
+                :class="{fixed: isFixed}"
+                v-show="isFixed"></TabControl>
     <Scroll class="content"
             ref="scroll"
             :probe-type="3"
+            :pull-up-load="true"
             @onscroll="getPosition"
             @PullingUp="getPullingUp">
-      <HomeSwiper :banner="banner"></HomeSwiper>
+      <HomeSwiper :banner="banner"
+                  @loadedImg="getoffsetTop"></HomeSwiper>
       <HomeRecommed :recommend="recommend"></HomeRecommed>
       <HomeFeature></HomeFeature>
       <TabControl :list="['流行','精选','新品']"
                   class="homeTabControl"
-                  @changeIndex="getIndex"></TabControl>
+                  ref="tabControl1"
+                  @changeIndex="getIndex"
+                  :class="{fixed: isFixed}"></TabControl>
       <GoodsList :goods="goods[this.currentIndex].list"></GoodsList>
     </Scroll>
     <BackTop v-show="isShowBackTop"
@@ -176,6 +186,10 @@ export default {
       currentIndex: 'pop',
       // 显示backTop的判断
       isShowBackTop: false,
+      //offsetTop
+      tabControlHeight: 0,
+      //tabControl吸顶判断
+      isFixed: false,
     }
   },
 
@@ -194,6 +208,15 @@ export default {
     this.getInfo('sell')
   },
 
+  //
+  mounted() {
+    //获取TabControl的offsetTop
+    // 所有组件都有$el属性，用于获取组件中的元素
+    // 这里得出的offsetTop是不准确的，原因是图片的异步加载，
+    // mounted中，此时图片可能没有完全加载进出，导致计算出来的高度不准确
+    // console.log(this.$refs.tabControl.$el.offsetTop)
+  },
+
   methods: {
     // 发起axios请求
     getInfo(type) {
@@ -204,7 +227,7 @@ export default {
         // Array.push(...item) <-- 可变参数
         this.goods[type].list.push(...res.data.data.list)
         this.goods[type].page += 1
-
+        // console.log(this.$refs.scroll.scroll)
         setTimeout(() => {
           this.$refs.scroll.scroll.finishPullUp()
         }, 2000)
@@ -229,11 +252,16 @@ export default {
         case 2:
           this.currentIndex = 'new'
       }
+      // console.log(index)
+      this.$refs.tabControl1.CurrentIndex = index
+      this.$refs.tabControl2.CurrentIndex = index
     },
 
     getPosition(position) {
-      // console.log(-position.y)
+      // console.log(-position.y),
       this.isShowBackTop = -position.y > 540
+      //
+      this.isFixed = -position.y > this.tabControlHeight
     },
     // 组件BackTop被点击时，
     OnClick() {
@@ -251,6 +279,15 @@ export default {
       //   this.$refs.scroll.scroll.finishPullUp()
       // }, 2000)
     },
+
+    getoffsetTop() {
+      // console.log(this.$refs.tabControl1.$el.offsetTop)
+      this.tabControlHeight = this.$refs.tabControl1.$el.offsetTop
+    },
+  },
+
+  destroyed() {
+    // console.log('销毁home')
   },
 }
 </script>
@@ -265,14 +302,22 @@ export default {
 
 .home-nav {
   /* // 固定盒子 */
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; */
   /* //不被覆盖 */
-  z-index: 999;
+  /* z-index: 999;   */
   background-color: pink;
 }
+
+/* .fixed {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0; */
+/* z-index: 999; */
+/* } */
 
 .content {
   position: absolute;
@@ -283,9 +328,14 @@ export default {
   overflow: hidden;
 }
 
-.homeTabControl {
-  /* // 控制滚动状态，让盒子滚动到特定位置时，会固定盒子，position: fixed , */
-  position: sticky;
-  top: 44px;
+/* .homeTabControl { */
+/* // 控制滚动状态，让盒子滚动到特定位置时，会固定盒子，position: fixed , */
+/* position: sticky;
+  top: 44px; */
+/* } */
+
+.homeTabControl2 {
+  position: relative;
+  z-index: 999;
 }
 </style>

@@ -54,7 +54,6 @@ export default {
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad,
         //上拉刷新时所需属性
-        pullUpLoad: true,
       })
       // 监听事件设置，处理函数
 

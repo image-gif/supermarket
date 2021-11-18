@@ -8,6 +8,7 @@
         <!-- 这里的herf ,src属性要动态绑定，不然后面的值会被当做字符串 -->
         <a :href="item.link">
           <img :src="item.image"
+               @load="loadImg"
                alt="">
         </a>
       </SwiperItem>
@@ -27,9 +28,24 @@ export default {
       default: function () {},
     },
   },
+
+  data() {
+    return {
+      isLoaded: false,
+    }
+  },
   components: {
     Swiper,
     SwiperItem,
+  },
+  methods: {
+    loadImg() {
+      if (!this.isLoaded) {
+        // console.log('loading images')
+        this.$emit('loadedImg')
+        this.isLoaded = true
+      }
+    },
   },
 }
 </script>

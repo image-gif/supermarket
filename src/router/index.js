@@ -9,6 +9,7 @@ import Home from '../views/Home/Home'
 import Category from '../views/Category/Category'
 import Cart from '../views/Cart/Cart'
 import Profile from '../views/Profile/Profile'
+import Detail from '../views/Detail/Detail'
 
 
 //解决路由无法多次点击，此处暂时没有结局问题
@@ -25,7 +26,8 @@ const routes = [
   {path: '/home',component: Home},
   {path: '/category',component: Category},
   {path: '/cart',component: Cart},
-  {path: '/profile',component: Profile},
+  {path: '/profile', component: Profile},
+  {path: '/detail/:id', component: Detail},
 ]
 
 const router = new VueRouter({
