@@ -15,11 +15,10 @@
     </div>
     <div class="info-service">
       <span class="serviceitem"
-            v-for="index in baseInfo.services.length-1"
+            v-for="index in baseInfo.services.length-2"
             :key="index">
-        <img :src="baseInfo.services[index-1].icon"
-             alt="">
-        <span>{{baseInfo.services[index-1].name}}</span>
+        <img :src="baseInfo.services[index].icon">
+        <span>{{baseInfo.services[index].name}}</span>
       </span>
     </div>
 

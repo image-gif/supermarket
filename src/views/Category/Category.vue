@@ -107,6 +107,7 @@
         <li><img src="@/assets/img/logo.png"> 100</li>
       </ul>
     </div>
+
   </div>
 </template>
 
