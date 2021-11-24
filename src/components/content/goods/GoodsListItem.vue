@@ -1,8 +1,9 @@
 <template>
   <div class="goods-item"
        @click="onClick">
-    <img :src="goodsItem.show.img"
-         alt="">
+    <!-- <img :src="goodsItem.show.img"
+         alt=""> -->
+    <img v-lazy="goodsItem.show.img">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -78,7 +79,6 @@ export default {
   top: -1px;
   width: 14px;
   height: 14px;
-  /* background: url('../../../assets/img/logo.png') no-repeat 14px; */
   background: url('../../../assets/img/collect.svg') 0 0/14px 14px;
 }
 </style>

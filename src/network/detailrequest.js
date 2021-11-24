@@ -1,13 +1,11 @@
 import { request } from './request.js'
 
-export { request } from './request.js'
-
 export function getDetailData(id) {
   return request({
     url: '/detail?'+'iid='+id,
-    params: {
-      id
-    }
+    // params: {
+    //   id
+    // }
   })
 }
 

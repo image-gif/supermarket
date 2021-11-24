@@ -11,7 +11,9 @@
              v-for="(item,index) in titles"
              :key='index'
              :class="{active: currentIndex === index}"
-             @click="itemClick(index)">{{item}}</div>
+             @click="itemClick(index)">
+          <span>{{item}}</span>
+        </div>
       </div>
 
     </NavBar>
@@ -25,6 +27,12 @@ export default {
   components: {
     NavBar,
   },
+  props: {
+    scrollCurIndex: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       titles: ['商品', '参数', '评论', '推荐'],
@@ -36,6 +44,7 @@ export default {
   methods: {
     itemClick(index) {
       this.currentIndex = index
+      this.$emit('currentIndex', index)
     },
     imgClick() {
       // 返回上一级
@@ -62,6 +71,10 @@ export default {
     }
     .active {
       color: pink;
+      span {
+        padding-bottom: 4px;
+        border-bottom: 2px solid pink;
+      }
     }
   }
 }

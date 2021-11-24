@@ -203,6 +203,7 @@ export default {
       // console.log(res.data.data.recommend.list)
       this.recommend = res.data.data.recommend.list
     })
+    // 初始时就获取各tabControl下的数据
     this.getInfo('pop')
     this.getInfo('new')
     this.getInfo('sell')
@@ -294,45 +295,20 @@ export default {
 
 <style  scoped>
 #home {
-  /* padding-top: 44px; */
   height: 100vh;
   position: relative;
-  /* // position: relative; */
 }
 
 .home-nav {
-  /* // 固定盒子 */
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0; */
-  /* //不被覆盖 */
-  /* z-index: 999;   */
   background-color: pink;
 }
-
-/* .fixed {
-  position: fixed;
-  top: 44px;
-  left: 0;
-  right: 0; */
-/* z-index: 999; */
-/* } */
 
 .content {
   position: absolute;
   top: 44px;
   bottom: 49px;
-  /* // background-color: blue; */
-  /* // z-index: 999; */
   overflow: hidden;
 }
-
-/* .homeTabControl { */
-/* // 控制滚动状态，让盒子滚动到特定位置时，会固定盒子，position: fixed , */
-/* position: sticky;
-  top: 44px; */
-/* } */
 
 .homeTabControl2 {
   position: relative;
